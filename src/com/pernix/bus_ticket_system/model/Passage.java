@@ -15,11 +15,23 @@ public abstract class Passage {
     public abstract void accept(Visitor visitor);
     
     public void deposit(float money){
-        this.money+=money;
+        if(money>0){
+            this.money+=money;
+        }
     }
     
     public void collect(float money){
-        this.money-=money;
+        if(this.money >= money & money>0){
+            this.money-=money;
+        }
+    }
+
+    public float getMoney() {
+        return money;
+    }
+
+    public void setMoney(float money) {
+        this.money = money;
     }
     
 }
