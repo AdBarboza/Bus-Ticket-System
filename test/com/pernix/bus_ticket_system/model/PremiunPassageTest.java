@@ -102,8 +102,52 @@ public class PremiunPassageTest {
      * Test of accept method, of class PremiunPassage.
      */
     @Test
-    public void testAccept() {
-        
+    public void testAcceptNormalVisitor1() {
+        NormalVisitor normalVisitor = new NormalVisitor();
+        passage.deposit(4000);
+        passage.accept(normalVisitor);
+        float expected = 3500;
+        assertEquals(expected , passage.getMoney(),0);
     }
     
+    @Test
+    public void testAcceptNormalVisitor2(){
+        NormalVisitor normalVisitor = new NormalVisitor();
+        passage.accept(normalVisitor);
+        float expected = 0;
+        assertEquals(expected , passage.getMoney(),0);
+    }
+    
+    @Test
+    public void testAcceptNormalVisitor3(){
+        NormalVisitor normalVisitor = new NormalVisitor();
+        passage.deposit(500);
+        passage.accept(normalVisitor);
+        float expected = 0;
+        assertEquals(expected , passage.getMoney(),0);
+    }
+    
+    @Test
+    public void testAcceptHighVisitor1(){
+        HighVisitor visitor = new HighVisitor();
+        passage.deposit(4000);
+        passage.accept(visitor);
+        float expected = 3500;
+        assertEquals(expected , passage.getMoney(),0);
+    }
+    @Test
+    public void testAcceptHighVisitor2(){
+        HighVisitor visitor = new HighVisitor();
+        passage.deposit(500);
+        passage.accept(visitor);
+        float expected = 0;
+        assertEquals(expected , passage.getMoney(),0);
+    }
+    @Test
+    public void testAcceptHighVisitor3(){
+        HighVisitor visitor = new HighVisitor();
+        passage.accept(visitor);
+        float expected = 0;
+        assertEquals(expected , passage.getMoney(),0);
+    }
 }
